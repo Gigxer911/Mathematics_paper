@@ -252,16 +252,10 @@ button {
         function openBoardPaper() {
             window.open("https://youtu.be/GoHDolSJxIQ?si=WACyZk-57PSeid9c", "_blank");
         }
-        function openBoardPaper() {
-    let videoUrl = "https://drive.google.com/file/d/1GUZFLA6wmkGJemlk4dBhbwruFMSZ3OVh/view?usp=sharing"; // Replace with your actual link
-    document.getElementById("driveVideo").src = videoUrl;
-    document.getElementById("videoContainer").classList.remove("hidden");
+      
 }
 
-function closeVideo() {
-    document.getElementById("videoContainer").classList.add("hidden");
-    document.getElementById("driveVideo").src = ""; // Stop the video when closed
-}
+
 
         function toggleButton(textareaId, buttonId) {
             let textValue = document.getElementById(textareaId).value.trim();
