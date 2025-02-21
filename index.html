@@ -197,6 +197,11 @@ button {
 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
+        function toggleButton(textareaId, buttonId) {
+    let textarea = document.getElementById(textareaId);
+    let button = document.getElementById(buttonId);
+    button.disabled = textarea.value.trim() === "";
+}
         document.addEventListener("DOMContentLoaded", function() {
             emailjs.init("xAGFEETxLLufFW5Cu"); // Initialize EmailJS after page load
         });
